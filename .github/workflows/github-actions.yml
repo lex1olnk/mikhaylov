@@ -22,4 +22,4 @@ jobs:
           ssh-keyscan -H ${{secrets.SERVER}} >> ~/.ssh/known_hosts
           echo "${{ secrets.SSH }}" > key
           chmod 600 key
-          ssh -i key student@${{secrets.SERVER}} dockerfile
+          ssh -i key student@${{secrets.SERVER}} docker build .
