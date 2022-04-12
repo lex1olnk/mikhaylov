@@ -7,20 +7,12 @@ jobs:
       - name: Checkout sources
         uses: actions/checkout@v3
 
-      - name: Setup node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-
-      - name: Build
+      - name: Clone BotFather
         run: |
-          npm ci
-          npm run build
-          npm run export
-          touch out/.nojekyll
+          git clone https://github.com/python-telegram-bot/python-telegram-bot --recursive
 
-      - name: Deploy on GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4.3.0
-        with:
-          branch: gh-pages
-          folder: out
+
+      - name: install BotFather
+        run: |
+          cd python-telegram-bot
+          python setup.py install
