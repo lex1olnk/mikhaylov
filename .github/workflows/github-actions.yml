@@ -15,4 +15,5 @@ jobs:
       - name: install BotFather
         run: |
           cd python-telegram-bot
-          sudo pip setup.py install
+          ls
+          sudo python setup.py install
