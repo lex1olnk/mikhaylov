@@ -7,13 +7,15 @@ jobs:
       - name: Checkout sources
         uses: actions/checkout@v3
 
-      - name: Clone BotFather
+      - name: Docker push
         run: |
-          git clone https://github.com/python-telegram-bot/python-telegram-bot --recursive
+          echo ${{ secrets.GHCR_PASSWORD }} | docker login ghcr.io --username ${{ github.actor }} --password-stdin
+          docker push ghcr.io/${{ github.repository }}:latest
 
-
-      - name: install BotFather
+      - name : ssh connect
         run: |
-          cd python-telegram-bot
-          ls
-          sudo python setup.py install
+          mkdir ~/.ssh
+          ssh-keyscan -H ${{secrets.SERVER}} >> ~/.ssh/known_hosts
+          echo "${{ secrets.SSH }}" > key
+          chmod 600 key
+          ssh -i key student@${{secrets.SERVER}} <dockerfile>
