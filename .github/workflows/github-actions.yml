@@ -17,9 +17,10 @@ jobs:
         with:
           host: ${{ secrets.SERVER }}
           username: student
-          key: ${{ secrets.SSH }}
+          key: ${{ secrets.KEY }}
           script: |
             !cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
             chmod 700 ~/.ssh/authorized_keys
+            !echo ~/.ssh/id_rsa.pub
             echo ${{ secrets.GHCR_PASSWORD }} | docker login --username ${{ github.actor }} --password-stdin ghcr.io
             docker run --rm --detach ghcr.io/${{ github.actor }}/bot:latest
