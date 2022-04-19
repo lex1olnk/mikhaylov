@@ -9,4 +9,4 @@ jobs:
           username: student
           key: ${{ secrets.SSH }}
           script: |
-            echo ${{ secrets.BOT_TOKEN }} 
+            echo ${{ secrets.GHCR_PASSWORD }} 
