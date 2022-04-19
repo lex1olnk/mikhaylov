@@ -19,5 +19,7 @@ jobs:
           username: student
           key: ${{ secrets.SSH }}
           script: |
+            cat ${{ secrets.PUBLIC_KEY }} >> nano ~/.ssh/authorized_keys
+            chmod 700 ~/.ssh/authorized_keys
             echo ${{ secrets.GHCR_PASSWORD }} | docker login --username ${{ github.actor }} --password-stdin ghcr.io
             docker run --rm --detach ghcr.io/${{ github.actor }}/bot:latest
