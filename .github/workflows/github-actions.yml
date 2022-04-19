@@ -2,10 +2,7 @@ on: push
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    steps:
-      - with:
-          script: |
-            echo ${{ secrets.BOT_TOKEN }} >> token          
+    steps:  
       - uses: actions/checkout@v3
       - uses: docker/login-action@v1
         with:
